@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Alix Maryory Camacho Céspedes | Odontóloga Estética & Epidemiología Clínica</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0F3460',
+                            900: '#091E3A',
+                            950: '#051122'
+                        },
+                        clinical: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#167380',
+                            600: '#13616C',
+                            700: '#0F4E57',
+                            800: '#0B3B42'
+                        },
+                        gold: {
+                            200: '#F7E7A9',
+                            300: '#E8C86B',
+                            400: '#D4AF37',
+                            500: '#C59B27',
+                            600: '#9A6F1A',
+                            700: '#785310'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Cinzel/Cormorant for Luxury Branding -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-luxury { font-family: 'Cinzel', serif; }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 35%, #9A6F1A 70%, #F7E7A9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 30px -5px rgba(197, 155, 39, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-clinical-500 selection:text-white">
+
+    <!-- Discreet Admin / Image Embedder Toolbar (Hidden when printing) -->
+    <div id="admin-toolbar" class="bg-navy-950 text-slate-200 border-b border-gold-500/30 px-4 py-2 text-xs print:hidden">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded bg-gold-500/20 text-gold-300 font-semibold border border-gold-400/30">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i> Diseñador de Fusión Visual
+                </span>
+                <span class="text-slate-300 hidden sm:inline">
+                    Configurado para integrar <strong>crespa_2.jpg</strong> y <strong>logo_2.jpeg</strong> en armonía profesional.
+                </span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <label class="cursor-pointer inline-flex items-center px-2.5 py-1 rounded bg-navy-800 hover:bg-clinical-600 text-white font-medium border border-gold-400/40">
+                    <i class="fa-solid fa-camera text-gold-300 mr-1"></i> Cambiar Foto (crespa_2.jpg)
+                    <input type="file" accept="image/*" class="hidden" onchange="cargarImagenPersonalizada(event, 'portrait')">
+                </label>
+                <label class="cursor-pointer inline-flex items-center px-2.5 py-1 rounded bg-navy-800 hover:bg-clinical-600 text-white font-medium border border-gold-400/40">
+                    <i class="fa-solid fa-crown text-gold-300 mr-1"></i> Cambiar Logo (logo_2.jpeg)
+                    <input type="file" accept="image/*" class="hidden" onchange="cargarImagenPersonalizada(event, 'logo')">
+                </label>
+                <button onclick="document.getElementById('admin-toolbar').style.display='none'" class="text-slate-400 hover:text-white px-1" title="Ocultar barra">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Brand Logo & Name -->
+                <a href="#" class="flex items-center space-x-3.5 group">
+                    <div class="relative w-14 h-12 rounded-xl bg-navy-950 border border-gold-400/40 shadow-sm flex items-center justify-center overflow-hidden p-0.5">
+                        <img id="nav-logo-img" src="./logo_2.jpeg" alt="Logo AC - Dra. Alix Camacho C."
+                            class="w-full h-full object-contain"
+                            onerror="this.src='./logo1.jpeg';">
+                    </div>
+                    <div>
+                        <span class="font-bold text-navy-900 block text-sm sm:text-base tracking-tight">Dra. Alix Camacho C.</span>
+                        <span class="text-xs text-gold-600 font-semibold block">Odontóloga Estética · Epidemiología Clínica</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-600">
+                    <a href="#perfil" class="hover:text-navy-800 transition-colors">Perfil</a>
+                    <a href="#diferenciador" class="hover:text-navy-800 transition-colors">Servicios & Valor</a>
+                    <a href="#europa" class="hover:text-navy-800 transition-colors">Estatus Europa</a>
+                    <a href="#experiencia" class="hover:text-navy-800 transition-colors">Experiencia</a>
+                    <a href="#educacion" class="hover:text-navy-800 transition-colors">Educación</a>
+                    <a href="#congresos" class="hover:text-navy-800 transition-colors">Congresos</a>
+                    <button onclick="abrirModalReclutador()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-navy-800 to-clinical-600 text-white hover:from-navy-900 hover:to-clinical-700 transition-all shadow-md font-semibold flex items-center gap-2 border border-gold-400/30">
+                        <i class="fa-solid fa-user-shield text-gold-300"></i> Contacto Reclutadores
+                    </button>
+                </div>
+
+                <!-- Mobile Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="menu-btn" class="text-navy-900 focus:outline-none p-2" aria-label="Menú">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-2 text-sm">
+            <a href="#perfil" class="block py-2 text-slate-700 font-medium">Perfil Profesional</a>
+            <a href="#diferenciador" class="block py-2 text-slate-700 font-medium">Servicios y Valor Diferencial</a>
+            <a href="#europa" class="block py-2 text-slate-700 font-medium">Estatus Europa (AGILIZA & CIMEA)</a>
+            <a href="#experiencia" class="block py-2 text-slate-700 font-medium">Experiencia Clínica y Docente</a>
+            <a href="#educacion" class="block py-2 text-slate-700 font-medium">Educación y Diplomados</a>
+            <a href="#congresos" class="block py-2 text-slate-700 font-medium">Congresos Internacionales</a>
+            <button onclick="abrirModalReclutador()" class="w-full mt-2 py-2.5 rounded-xl bg-navy-800 text-white font-semibold text-center">
+                <i class="fa-solid fa-shield-halved text-gold-300 mr-1.5"></i> Portal de Contacto Seguro
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero / Profile Header with Harmonious Visual Fusion Design -->
+    <header class="relative bg-gradient-to-br from-navy-950 via-navy-800 to-clinical-700 text-white overflow-hidden py-14 lg:py-20">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+                <!-- Left Column: Summary & Secure Actions -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-gold-500/15 text-gold-200 border border-gold-400/40">
+                        <i class="fa-solid fa-earth-europe text-gold-300"></i>
+                        <span>Homologación CIMEA (Italia) · España en Fase Final (Elegible Vía AGILIZA)</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-xs sm:text-sm uppercase tracking-[0.2em] text-gold-300 font-semibold">
+                            Portafolio Profesional & Currículum Ejecutivo
+                        </p>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                            Dra. Alix Maryory Camacho Céspedes
+                        </h1>
+                        <p class="text-lg sm:text-xl text-clinical-100 font-medium pt-1">
+                            Odontóloga | Especialista en Estética Dental, Rehabilitación Oral y Epidemiología Clínica
+                        </p>
+                    </div>
+
+                    <p class="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        <strong>19 años de sólida trayectoria clínica, administrativa, docente y humanitaria</strong>. Unifico la excelencia práctica en Rehabilitación Oral, Prótesis y Estética (Universidad de Antioquia) con el rigor metodológico del <strong>Máster Oficial en Epidemiología y Salud Pública (60 ECTS en curso)</strong>.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3.5 pt-2">
+                        <button onclick="abrirModalReclutador()" class="inline-flex items-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-navy-950 font-bold shadow-lg transition-all">
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Contactar / Enviar Propuesta
+                        </button>
+                        <button onclick="accionContactoProtegido('whatsapp')" class="inline-flex items-center px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-lg transition-all">
+                            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> WhatsApp Profesional
+                        </button>
+                        <button onclick="accionContactoProtegido('tel')" class="inline-flex items-center px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold border border-white/20 backdrop-blur-sm transition-all">
+                            <i class="fa-solid fa-phone-volume mr-2 text-gold-300"></i> Llamada Directa
+                        </button>
+                        <a href="https://www.linkedin.com/in/dra-alix-camacho" target="_blank" rel="noopener" class="inline-flex items-center px-5 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg transition-all">
+                            <i class="fa-brands fa-linkedin mr-2 text-lg"></i> LinkedIn
+                        </a>
+                    </div>
+
+                    <div class="pt-3 flex flex-wrap justify-center lg:justify-start gap-2.5 text-xs text-slate-200">
+                        <span class="bg-navy-900/80 px-3.5 py-1.5 rounded-lg border border-gold-400/30 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-gold-300"></i> Medellín, Colombia · Disponibilidad España e Italia
+                        </span>
+                        <span class="bg-navy-900/80 px-3.5 py-1.5 rounded-lg border border-gold-400/30 flex items-center gap-1.5">
+                            <i class="fa-solid fa-certificate text-gold-300"></i> Títulos y Experiencia Apostilladas
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Harmonious Visual Fusion Design (Portrait crespa_2.jpg fused with Gold Logo logo_2.jpeg) -->
+                <div class="lg:col-span-5 flex flex-col items-center">
+                    <div class="relative w-full max-w-sm rounded-3xl bg-gradient-to-b from-gold-300 via-gold-500 to-navy-900 p-1 gold-border-glow">
+                        <div class="bg-navy-950 rounded-[22px] p-6 flex flex-col items-center text-center relative overflow-hidden">
+
+                            <!-- Status Bar -->
+                            <div class="w-full flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                                <span class="text-[11px] font-semibold uppercase tracking-widest text-gold-300 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-user-doctor"></i> Fusión Visual & Estética
+                                </span>
+                                <span class="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Activa Europa
+                                </span>
+                            </div>
+
+                            <!-- Harmonious Fusion Container: Portrait (crespa_2.jpg) overlaid with Brand Gold Logo (logo_2.jpeg) -->
+                            <div class="relative w-56 h-56 sm:w-60 sm:h-60 rounded-2xl p-1 bg-gradient-to-tr from-gold-500 via-gold-300 to-clinical-500 shadow-2xl mb-5 overflow-hidden group">
+                                <img id="hero-portrait-img" src="./crespa_2.jpg" alt="Dra. Alix Maryory Camacho Céspedes"
+                                    class="w-full h-full object-cover object-top rounded-xl bg-navy-900"
+                                    onerror="this.src='./crespa.jpg';">
+
+                                <!-- Floating Gold Logo Watermark Badge (logo_2.jpeg fused inside the portrait frame) -->
+                                <div class="absolute bottom-3 right-3 w-16 h-16 rounded-xl bg-navy-950/90 border border-gold-400 shadow-lg p-1 flex items-center justify-center backdrop-blur-md overflow-hidden">
+                                    <img id="hero-logo-badge" src="./logo_2.jpeg" alt="Logo AC" class="w-full h-full object-contain" onerror="this.src='./logo1.jpeg';">
+                                </div>
+
+                                <!-- Hover Upload Overlay -->
+                                <label class="cursor-pointer absolute inset-0 bg-navy-950/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-xs text-white font-semibold p-3">
+                                    <i class="fa-solid fa-camera-rotate text-gold-300 text-xl mb-1"></i>
+                                    <span>Personalizar imagen crespa_2.jpg / logo_2.jpeg</span>
+                                    <input type="file" accept="image/*" class="hidden" onchange="cargarImagenPersonalizada(event, 'portrait')">
+                                </label>
+                            </div>
+
+                            <!-- Brand Card Header -->
+                            <div class="w-full bg-white/10 rounded-xl p-3 border border-gold-400/30 flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-crown text-gold-300 text-sm"></i>
+                                <span class="text-xs font-bold text-gold-200 uppercase tracking-widest">Alix Camacho C. · Odontóloga Estética</span>
+                            </div>
+
+                            <!-- Official Web Links -->
+                            <div class="mt-4 pt-3 w-full flex items-center justify-between text-xs text-slate-300 px-2">
+                                <a href="http://www.alixcamachoc.com" target="_blank" rel="noopener" class="hover:text-gold-300 transition-colors flex items-center gap-1.5">
+                                    <i class="fa-solid fa-globe text-gold-400"></i> alixcamachoc.com
+                                </a>
+                                <div class="flex items-center space-x-3 text-base">
+                                    <a href="https://www.linkedin.com/in/dra-alix-camacho" target="_blank" rel="noopener" title="LinkedIn" class="hover:text-gold-300 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                                    <a href="https://www.instagram.com/dra.alixcamachc" target="_blank" rel="noopener" title="Instagram" class="hover:text-gold-300 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                                    <button onclick="abrirModalReclutador()" title="Contacto" class="hover:text-gold-300 transition-colors"><i class="fa-solid fa-envelope-circle-check"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-16">
+
+        <!-- 1. Perfil Profesional -->
+        <section id="perfil" class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-8 sm:p-10 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-gold-500 via-clinical-500 to-navy-800"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-navy-800 text-gold-300 flex items-center justify-center text-xl shadow-sm">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-navy-900">Perfil Profesional y Académico</h2>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-clinical-600">Perfil Inteligente Europa & Latinoamérica</p>
+                    </div>
+                </div>
+                <span class="inline-flex items-center px-3.5 py-1.5 rounded-xl bg-clinical-50 text-clinical-700 text-xs font-bold border border-clinical-100">
+                    19 Años de Praxis Ininterrumpida (2006 – Presente)
+                </span>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-base sm:text-lg text-justify">
+                Odontóloga con <strong>19 años de sólida experiencia clínica y humanitaria</strong>, caracterizada por un enfoque transversal que unifica la excelencia práctica en <strong>Rehabilitación Oral, Prótesis y Estética (Universidad de Antioquia)</strong> con el rigor metodológico y analítico de la <strong>Epidemiología y Salud Pública (Máster Oficial Europeo en curso, 60 ECTS)</strong>. Destacada por un profundo don de servicio y vocación humanitaria, priorizando siempre la empatía, el bienestar integral y la calidad de vida de cada paciente. Perfil preparado para acogerse a vías de alta cualificación y contratación preferente en España, capaz de trasladar la práctica clínica hacia la gestión asistencial y la evidencia científica. Sólida trayectoria en docencia, bienestar institucional, normativas de bioseguridad y actualización continua en rehabilitación oral y en cirugía bucal.
+            </p>
+        </section>
+
+        <!-- Services & Differential Value -->
+        <section id="diferenciador" class="space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Propuesta de Valor Diferencial</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900">Servicios Especializados, Experiencia y Factor Diferenciador</h2>
+                <p class="text-sm text-slate-600">Combinación de precisión estética, tecnología CAD/CAM, calidez humana y visión epidemiológica.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+                <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between border-t-4 border-t-gold-500">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-gold-200/40 text-gold-700 flex items-center justify-center text-2xl mb-5">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-navy-900 mb-2">1. Odontología Humanizada y Reducción de Ansiedad</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Priorizo la escucha activa, la empatía y el bienestar emocional para transformar la consulta odontológica en una experiencia tranquila, segura y libre de estrés en <strong>pacientes complejos, adultos mayores o con temor dental</strong>.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-100 text-xs font-semibold text-gold-700">
+                        <i class="fa-solid fa-check mr-1"></i> Calidez Humana y Ética Clínica
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between border-t-4 border-t-clinical-500">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-clinical-50 text-clinical-600 flex items-center justify-center text-2xl mb-5">
+                            <i class="fa-solid fa-laptop-medical"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-navy-900 mb-2">2. Rehabilitación Estética & Flujo Digital CAD/CAM</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Especialista en <strong>Rehabilitación Oral, Estética Dental Avanzada, Prótesis (fija, removible y sobre implantes) y Oclusión Funcional</strong>. Integración de sistemas CAD/CAM y diagnóstico radiológico oral y maxilofacial.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-100 text-xs font-semibold text-clinical-600">
+                        <i class="fa-solid fa-check mr-1"></i> Precisión Digital y Biomateriales
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between border-t-4 border-t-navy-800">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 text-navy-800 flex items-center justify-center text-2xl mb-5">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-navy-900 mb-2">3. Rigor Epidemiológico y Gerencia en Salud Oral</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Capacidad para liderar la <strong>dirección médica de IPS, auditoría de calidad, bioseguridad (SG-SST), vigilancia epidemiológica</strong> y programas de promoción y bienestar universitario en Europa y Latinoamérica.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-100 text-xs font-semibold text-navy-800">
+                        <i class="fa-solid fa-check mr-1"></i> Máster Europeo 60 ECTS (En curso)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. International Administrative Status (Spain & Italy CIMEA) -->
+        <section id="europa" class="bg-gradient-to-br from-navy-950 via-navy-900 to-clinical-800 text-white rounded-3xl shadow-xl p-8 sm:p-10 border border-gold-500/30">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/20 border border-gold-400/40 text-gold-300 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-passport"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Estatus Administrativo Internacional y Contratación en Europa</h2>
+                        <p class="text-xs text-gold-300">Documentación oficial apostillada lista para verificación por clínicas y hospitales</p>
+                    </div>
+                </div>
+                <button onclick="abrirModalReclutador()" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-xs transition-all self-start md:self-auto">
+                    <i class="fa-solid fa-file-shield mr-1.5"></i> Solicitar Dossier de Homologación
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🇪🇸</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/30">Fase Final (3 años de avance)</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gold-300 mb-2">España · Grado en Odontología</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Homologación de título extranjero al título oficial universitario español de Grado en Odontología en trámite activo ante el <strong>Ministerio de Ciencia, Innovación y Universidades de España</strong>.
+                    </p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-gold-400/30">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">⚡</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">Vía Preferente Activa</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gold-300 mb-2">Elegible Procedimiento AGILIZA</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Disponibilidad inmediata para acogerse a vías de contratación de alta cualificación (<strong>precontrato o compromiso laboral + declaración responsable del empleador</strong>) para priorización en España.
+                    </p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🇮🇹</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30">Verificado CIMEA</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gold-300 mb-2">Italia · Reconocimiento CIMEA</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Título de Odontóloga homologado y verificado oficialmente en Italia mediante certificación CIMEA (<em>Attestato di Comparabilità</em> y <em>Attestato di Verifica</em>).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Professional Experience -->
+        <section id="experiencia" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sm:p-10">
+            <div class="flex items-center space-x-3.5 mb-8">
+                <div class="w-12 h-12 rounded-2xl bg-clinical-50 text-clinical-600 flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-briefcase-medical"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-navy-900">Experiencia Laboral, Clínica y Docente</h2>
+                    <p class="text-xs text-slate-500">Trayectoria certificada y respaldada con validación institucional</p>
+                </div>
+            </div>
+
+            <div class="space-y-8 border-l-2 border-gold-400 pl-6 ml-3">
+                <div class="relative">
+                    <span class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-gold-500 border-4 border-white shadow"></span>
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-bold text-clinical-600 uppercase tracking-wider">Octubre de 2009 – Presente</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-medium border border-emerald-200">
+                            <i class="fa-solid fa-check-double mr-1"></i> Carta Laboral Apostillada por Cancillería
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-navy-900 mt-1">Odontóloga General y Estética en Práctica Privada Independiente</h3>
+                    <p class="text-xs font-semibold text-gold-600">Marca Clínica: Dra. Alix Camacho · Medellín, Colombia</p>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        Diagnóstico avanzado, rehabilitación estética integral, prótesis sobre implantes, oclusión funcional, flujos digitales (CAD/CAM) y enfoque centrado en la calidez humana y reducción de la ansiedad del paciente.
+                    </p>
+                </div>
+
+                <div class="relative">
+                    <span class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-clinical-500 border-4 border-white shadow"></span>
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-bold text-clinical-600 uppercase tracking-wider">Julio – Noviembre de 2024 (288 horas)</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium">
+                            Docencia & Bienestar Universitario
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-navy-900 mt-1">Asesoría y Acompañamiento Académico / Bienestar Institucional</h3>
+                    <p class="text-xs font-semibold text-gold-600">Tecnológico de Antioquia (TdeA) - Institución Universitaria</p>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        Acompañamiento a proyectos de permanencia estudiantil y asesoría integral en dimensiones de bienestar institucional.
+                    </p>
+                </div>
+
+                <div class="relative">
+                    <span class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-navy-800 border-4 border-white shadow"></span>
+                    <span class="text-xs font-bold text-clinical-600 uppercase tracking-wider">2007 – 2019</span>
+                    <h3 class="text-lg font-bold text-navy-900 mt-1">Experiencia Clínica y Directiva Previa en IPS</h3>
+                    <ul class="text-slate-600 text-sm mt-2 space-y-2 list-disc list-inside">
+                        <li><strong>Odontóloga en IPS Comfamiliar Camacol - COODAN</strong> (2013 – 2019): Atención clínica ininterrumpida en rehabilitación, estética y salud oral.</li>
+                        <li><strong>Gerente Administrativa y Odontóloga en Clínica Salud Oral Center IPS</strong> (2013): Dirección operativa, gestión de calidad asistencial y praxis clínica.</li>
+                        <li><strong>Práctica Clínica en Orthogarcia y Clínicas Sonría</strong> (2007 – 2009): Odontología general, urgencias y planes de tratamiento rehabilitador.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Education & Master's -->
+        <section id="educacion" class="space-y-10">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sm:p-10">
+                <div class="flex items-center space-x-3.5 mb-8">
+                    <div class="w-12 h-12 rounded-2xl bg-navy-800 text-gold-300 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-navy-900">Educación Principal y Títulos Oficiales</h2>
+                        <p class="text-xs text-slate-500">Formación universitaria superior apostillada y con validación internacional</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block text-xs font-bold text-clinical-700 bg-clinical-100 px-3 py-1 rounded-lg">Sept 2024 – Mar 2027 (En Curso)</span>
+                            <h3 class="font-bold text-navy-900 text-lg mt-3">Máster Oficial Universitario en Epidemiología y Salud Pública</h3>
+                            <p class="text-slate-600 text-sm mt-2">
+                                <strong>Euroinnova International Online Education</strong> en colaboración con <strong>Università Telematica e-Campus</strong> (Campus Europeo).
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-semibold text-navy-800">
+                            60 Créditos ECTS · Homologable en Europa y Colombia
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block text-xs font-bold text-navy-800 bg-blue-100 px-3 py-1 rounded-lg">10 de Noviembre de 2006</span>
+                            <h3 class="font-bold text-navy-900 text-lg mt-3">Odontóloga (Título Oficial de Pregrado)</h3>
+                            <p class="text-slate-600 text-sm mt-2">
+                                <strong>Universidad de Antioquia (U. de A.)</strong>, Medellín, Colombia.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-semibold text-emerald-700">
+                            <i class="fa-solid fa-shield-check mr-1"></i> Diploma y Calificaciones Apostilladas + CIMEA
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-lg">14 de Diciembre de 2006</span>
+                            <h3 class="font-bold text-navy-900 text-lg mt-3">Auxiliar de Higiene Oral</h3>
+                            <p class="text-slate-600 text-sm mt-2">
+                                <strong>Servicio Nacional de Aprendizaje (SENA)</strong>. Reexpedición certificada: 27/06/2025.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-semibold text-slate-600">
+                            Certificación Oficial Apostillada
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Continuing Education, Diplomates & Courses -->
+            <div id="diplomados" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sm:p-10">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/15 text-gold-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-navy-900">Diplomados de Profundización y Educación Continua</h2>
+                            <p class="text-xs text-slate-500">Más de 850 horas acreditadas en estética, rehabilitación, implantes, gerencia y cirugía</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-navy-900 text-white text-xs uppercase tracking-wider">
+                                <th class="p-3.5 font-semibold rounded-tl-xl">Diplomado / Programa Académico</th>
+                                <th class="p-3.5 font-semibold">Institución</th>
+                                <th class="p-3.5 font-semibold">Fechas de Realización</th>
+                                <th class="p-3.5 font-semibold rounded-tr-xl">Intensidad & Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-sm text-slate-700">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Diplomado en Gerencia en Salud Oral</td>
+                                <td class="p-3.5">Universidad CES</td>
+                                <td class="p-3.5">08 de agosto al 19 de octubre de 2016</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">84 horas · Apostillado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Diplomado en Odontología Estética Avanzada</td>
+                                <td class="p-3.5">Universidad CES</td>
+                                <td class="p-3.5">05 de septiembre al 07 de noviembre de 2014</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">120 horas · Apostillado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Diplomado en Implantología Aplicada</td>
+                                <td class="p-3.5">Universidad CES / COODAN</td>
+                                <td class="p-3.5">22 de marzo al 21 de junio de 2013</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">100 horas · Apostillado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Diplomado Avanzado en Rehabilitación Oral Estética: Dental e Implantología</td>
+                                <td class="p-3.5">Federación Odontológica Colombiana (FOC)</td>
+                                <td class="p-3.5">09 de marzo al 18 de agosto de 2012</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">120 horas · Certificado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Diplomatura en Prótesis Total y Odontología Geriátrica</td>
+                                <td class="p-3.5">Universidad CES</td>
+                                <td class="p-3.5">17 de abril al 22 de mayo de 2012</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">44 horas · Apostillado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Diplomado de Estética y Biomateriales de Restauración</td>
+                                <td class="p-3.5">Universidad de Antioquia (U. de A.)</td>
+                                <td class="p-3.5">Finalizado el 05 de diciembre de 2009</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">160 horas · Certificado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3.5 font-bold text-navy-900">Curso: Sistema de Gestión de la Seguridad y Salud en el Trabajo (SG-SST)</td>
+                                <td class="p-3.5">SENA</td>
+                                <td class="p-3.5">Expedido el 04 de diciembre de 2023</td>
+                                <td class="p-3.5"><span class="px-2.5 py-1 rounded-md bg-clinical-50 text-clinical-700 font-semibold text-xs">50 horas · Apostillado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-6 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-navy-900 mb-3">
+                        <i class="fa-solid fa-stethoscope text-clinical-600 mr-1.5"></i> Cursos de Actualización Clínica y Digital Complementaria
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs text-slate-700">
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Cirugía Oral y Manejo Farmacológico</strong> · U. de A. (2026, 32 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Terapia de Avance Mandibular - DAM</strong> · U. de A. (2025, 8 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Actualización en Técnicas y Protocolos para Odontología Estética y Rehabilitación Oral</strong> · U. de A. (09 mar 2024, 8 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Ruta Integral de Promoción y Mantenimiento de la Salud en Odontología</strong> · U. de A. (13 sep 2023, 16 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Actualización en Rehabilitación Oral</strong> · U. de A. (12 may 2022, 32 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Diagnóstico y Tratamiento Integral de Dolor y Desórdenes Orofaciales</strong> · Universidad CES (03 may 2021, 4 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Rehabilitación con Prótesis Removible</strong> · COODAN (14 may 2011, 6 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Competencias Digitales en Salud</strong> · SENA (48 horas)</div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200/80"><strong>Inglés Técnico Profesional</strong> · SENA</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. International Congresses & Symposia (2024-2026) -->
+        <section id="congresos" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sm:p-10">
+            <div class="flex items-center space-x-3.5 mb-8">
+                <div class="w-12 h-12 rounded-2xl bg-clinical-50 text-clinical-600 flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-navy-900">Congresos, Simposios y Actualizaciones Internacionales</h2>
+                    <p class="text-xs text-slate-500">Participación continua en eventos científicos de vanguardia e inteligencia artificial en odontología</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors">
+                    <div class="flex justify-between items-center text-xs font-bold text-clinical-600 mb-1">
+                        <span>29 de Julio de 2026</span>
+                        <span class="bg-clinical-100 text-clinical-800 px-2 py-0.5 rounded">Intensidad: 8 horas</span>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-sm">III Simposio de Radiología Oral y Maxilofacial 2026</h3>
+                    <p class="text-xs text-slate-600 mt-1">Cero 70 S.A.S. (Medellín, Colombia).</p>
+                </div>
+
+                <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors">
+                    <div class="flex justify-between items-center text-xs font-bold text-clinical-600 mb-1">
+                        <span>23 y 24 de Julio de 2026</span>
+                        <span class="bg-clinical-100 text-clinical-800 px-2 py-0.5 rounded">Intensidad: 16 horas</span>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-sm">Congreso 85 Años Facultad de Odontología y 55° Simposio Internacional</h3>
+                    <p class="text-xs text-slate-600 mt-1">"Innovación e Inteligencia Artificial para una Odontología Sostenible" – Universidad de Antioquia.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors">
+                    <div class="flex justify-between items-center text-xs font-bold text-clinical-600 mb-1">
+                        <span>11 y 12 de Julio de 2026</span>
+                        <span class="bg-clinical-100 text-clinical-800 px-2 py-0.5 rounded">Intensidad: 16 horas</span>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-sm">Congreso Médico Latinoamericano de Atención y Cuidado Primario - IPMA 2026</h3>
+                    <p class="text-xs text-slate-600 mt-1">Instituto Profesional de Medicina Avanzada / International University of South Florida (Medellín).</p>
+                </div>
+
+                <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors">
+                    <div class="flex justify-between items-center text-xs font-bold text-clinical-600 mb-1">
+                        <span>17 de Octubre de 2025</span>
+                        <span class="bg-clinical-100 text-clinical-800 px-2 py-0.5 rounded">Intensidad: 8 horas</span>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-sm">IX Congreso de Odontología General y XIII Congreso de Técnicos en Salud Oral</h3>
+                    <p class="text-xs text-slate-600 mt-1">"Una oportunidad para regresar, juntos" – CIOA, Alcaldía de Medellín, Universidad CES, U. de A., UCC y ASORAL.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors">
+                    <div class="flex justify-between items-center text-xs font-bold text-clinical-600 mb-1">
+                        <span>16 de Octubre de 2024</span>
+                        <span class="bg-clinical-100 text-clinical-800 px-2 py-0.5 rounded">Intensidad: 8 horas</span>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-sm">VIII Congreso de Odontología General y XII Congreso de Técnicos en Salud Oral</h3>
+                    <p class="text-xs text-slate-600 mt-1">Conferencia especializada: "Atención de víctimas de violencia sexual" – CIOA y entidades aliadas.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors">
+                    <div class="flex justify-between items-center text-xs font-bold text-clinical-600 mb-1">
+                        <span>Febrero de 2024 & 2023</span>
+                        <span class="bg-clinical-100 text-clinical-800 px-2 py-0.5 rounded">8 horas c/u</span>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-sm">Segundo Congreso Magno Internacional 3M Cuidado Oral & X Simposio "Infectomanía"</h3>
+                    <p class="text-xs text-slate-600 mt-1">3M Cuidado Oral (Febrero 2024) y F.A.I. (2023).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Advanced Competencias & Digital Expertise -->
+        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sm:p-10">
+            <div class="flex items-center space-x-3.5 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-navy-800 text-gold-300 flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-navy-900">Competencias Avanzadas y Áreas de Expertise</h2>
+                    <p class="text-xs text-slate-500">Dominio clínico, analítico y tecnológico</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <h3 class="font-bold text-navy-900 mb-2 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-clinical-600"></i> Enfoque Humano y Asistencial</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Alto nivel de empatía, escucha activa, humanización en la prestación de servicios de salud oral y reducción de la ansiedad dental en pacientes complejos.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <h3 class="font-bold text-navy-900 mb-2 flex items-center gap-2"><i class="fa-solid fa-laptop-code text-clinical-600"></i> Habilidades Técnicas y Digitales</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Flujos de trabajo digitales (Workflow Digital), Sistemas CAD/CAM, Radiología Oral y Maxilofacial, Oclusión Funcional y Epidemiología Clínica.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <h3 class="font-bold text-navy-900 mb-2 flex items-center gap-2"><i class="fa-solid fa-award text-clinical-600"></i> Validación de la Experiencia</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">19 años de praxis odontológica ininterrumpida orientada a la calidad, la gerencia en salud oral y la evidencia científica en salud pública.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Secure Contact Section & Footer -->
+        <section id="contacto" class="bg-gradient-to-br from-navy-950 via-navy-900 to-slate-900 text-white rounded-3xl shadow-2xl p-8 sm:p-12 border border-gold-500/30">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5 space-y-5">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gold-500/20 text-gold-300 border border-gold-400/30">
+                        <i class="fa-solid fa-lock mr-1.5"></i> Privacidad Digital Activa
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight">
+                        Canales Directos para Reclutadores, Clínicas y Pacientes
+                    </h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Para proteger la seguridad digital de la <strong>Dra. Alix Camacho</strong> en internet público, su número telefónico y correos electrónicos personales se encuentran cifrados y no se exponen en pantalla. Puede iniciar una llamada, chat de WhatsApp o enviar un correo mediante estos botones seguros:
+                    </p>
+
+                    <div class="space-y-3 pt-2">
+                        <button onclick="accionContactoProtegido('whatsapp')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-left transition-all group">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-11 h-11 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white text-sm">Iniciar Chat en WhatsApp Profesional</div>
+                                    <div class="text-xs text-emerald-300">Conexión directa sin exponer el número en la web</div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-emerald-300 group-hover:translate-x-0.5 transition-transform"></i>
+                        </button>
+
+                        <button onclick="accionContactoProtegido('tel')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-left transition-all group">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-11 h-11 rounded-xl bg-gold-500 text-navy-950 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-phone-volume"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white text-sm">Llamar Directamente</div>
+                                    <div class="text-xs text-slate-300">Haga clic para marcar desde su dispositivo</div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gold-300"></i>
+                        </button>
+
+                        <button onclick="accionContactoProtegido('email1')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-left transition-all group">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-11 h-11 rounded-xl bg-clinical-500 text-white flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-envelope-shield"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white text-sm">Correo Electrónico Principal & Alterno</div>
+                                    <div class="text-xs text-slate-300">Cifrado anti-spam para procesos de selección</div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-paper-plane text-clinical-100"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-navy-900/90 border border-gold-400/30 rounded-2xl p-6 sm:p-8 shadow-xl">
+                    <h3 class="text-lg font-bold text-gold-300 mb-1">Formulario de Contacto Rápido (Sin Exposición de Datos)</h3>
+                    <p class="text-xs text-slate-300 mb-5">Complete los campos y elija si desea enviar su mensaje por Correo Electrónico o por WhatsApp.</p>
+                    <form onsubmit="enviarMensajeProtegido(event, 'email')" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Su Nombre / Reclutador *</label>
+                                <input type="text" id="form-name" required placeholder="Ej. Dirección Médica / RRHH" class="w-full px-3.5 py-2.5 rounded-xl bg-navy-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold-400">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Clínica / Entidad / Paciente *</label>
+                                <input type="text" id="form-org" required placeholder="Nombre de la institución o paciente" class="w-full px-3.5 py-2.5 rounded-xl bg-navy-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold-400">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">País / Ubicación *</label>
+                                <select id="form-country" class="w-full px-3.5 py-2.5 rounded-xl bg-navy-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold-400">
+                                    <option value="España (Oferta / Vía AGILIZA)">España (Oferta / Vía AGILIZA)</option>
+                                    <option value="Italia (Reconocimiento CIMEA)">Italia (Reconocimiento CIMEA)</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Otro País">Otro País</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Asunto *</label>
+                                <select id="form-subject" class="w-full px-3.5 py-2.5 rounded-xl bg-navy-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold-400">
+                                    <option value="Oferta Laboral / Precontrato Alta Cualificación">Oferta Laboral / Precontrato</option>
+                                    <option value="Solicitud de Dossier y Apostillas">Solicitud de Dossier y Apostillas</option>
+                                    <option value="Consultoría en Epidemiología y Salud Pública">Consultoría en Epidemiología</option>
+                                    <option value="Cita de Valoración Odontológica">Cita de Valoración Odontológica</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-1">Mensaje *</label>
+                            <textarea id="form-msg" rows="3" required placeholder="Escriba los detalles de su propuesta o solicitud..." class="w-full px-3.5 py-2.5 rounded-xl bg-navy-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold-400"></textarea>
+                        </div>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <button type="submit" class="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-navy-950 font-bold text-sm shadow-lg transition-all">
+                                <i class="fa-solid fa-envelope mr-2"></i> Enviar a los 2 Correos Oficiales
+                            </button>
+                            <button type="button" onclick="enviarMensajeProtegido(event, 'whatsapp')" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-lg transition-all">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Enviar por WhatsApp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Links -->
+            <div class="mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+                <div class="flex flex-wrap justify-center gap-5">
+                    <a href="http://www.alixcamachoc.com" target="_blank" rel="noopener" class="text-gold-300 hover:underline"><i class="fa-solid fa-globe mr-1"></i> www.alixcamachoc.com</a>
+                    <a href="https://www.linkedin.com/in/dra-alix-camacho" target="_blank" rel="noopener" class="text-gold-300 hover:underline"><i class="fa-brands fa-linkedin mr-1"></i> www.linkedin.com/in/dra-alix-camacho</a>
+                    <a href="https://www.instagram.com/dra.alixcamachc" target="_blank" rel="noopener" class="text-gold-300 hover:underline"><i class="fa-brands fa-instagram mr-1"></i> @dra.alixcamachc</a>
+                    <span><i class="fa-brands fa-facebook text-gold-300 mr-1"></i> Doctora Alix Camacho Odontóloga</span>
+                </div>
+                <p>© 2026 Dra. Alix Maryory Camacho Céspedes · Privacidad Protegida</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal for Recruiters -->
+    <div id="recruiter-modal" class="fixed inset-0 z-50 hidden bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gold-400/50 relative">
+            <button onclick="cerrarModalReclutador()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-11 h-11 rounded-xl bg-navy-800 text-gold-300 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-navy-900 text-lg">Contacto Directo Protegido</h3>
+                    <p class="text-xs text-slate-500">Seleccione el canal para comunicarse con la Dra. Alix Camacho</p>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 mb-5 leading-relaxed">
+                Sus datos de contacto están protegidos contra rastreadores públicos. Al pulsar cualquiera de las siguientes opciones, se abrirá la comunicación oficial de forma inmediata:
+            </p>
+            <div class="space-y-3">
+                <button onclick="accionContactoProtegido('whatsapp')" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm flex items-center justify-between shadow">
+                    <span><i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Abrir Chat de WhatsApp</span>
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+                <button onclick="accionContactoProtegido('tel')" class="w-full py-3 px-4 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-semibold text-sm flex items-center justify-between shadow">
+                    <span><i class="fa-solid fa-phone-volume mr-2 text-gold-300"></i> Realizar Llamada Telefónica</span>
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+                <button onclick="accionContactoProtegido('email1')" class="w-full py-3 px-4 rounded-xl bg-clinical-600 hover:bg-clinical-700 text-white font-semibold text-sm flex items-center justify-between shadow">
+                    <span><i class="fa-solid fa-envelope mr-2"></i> Enviar Correo a Ambos Emails Oficiales</span>
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Controllers -->
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Modal Controls
+        function abrirModalReclutador() {
+            document.getElementById('recruiter-modal').classList.remove('hidden');
+        }
+        function cerrarModalReclutador() {
+            document.getElementById('recruiter-modal').classList.add('hidden');
+        }
+
+        // Encrypted Vault for Phone & Emails (Anti-Spam)
+        const _vault = {
+            ph: [53, 55, 51, 50, 48, 56, 53, 53, 53, 49, 50, 50], // +573208555122
+            em1: [97,108,105,120,99,97,109,97,99,104,111,46,50,48,50,51,64,103,109,97,105,108,46,99,111,109], // alixcamacho.2023@gmail.com
+            em2: [97,108,105,120,99,97,109,97,99,104,111,50,48,49,48,64,103,109,97,105,108,46,99,111,109] // alixcamacho2010@gmail.com
+        };
+
+        function _decode(arr) {
+            return String.fromCharCode.apply(null, arr);
+        }
+
+        function accionContactoProtegido(canal) {
+            const p = _decode(_vault.ph);
+            const m1 = _decode(_vault.em1);
+            const m2 = _decode(_vault.em2);
+
+            if (canal === 'whatsapp') {
+                const msg = encodeURIComponent("Hola Dra. Alix Camacho, he revisado su CV y Portafolio Web Oficial y deseo comunicarme con usted.");
+                window.open("https://wa.me/" + p + "?text=" + msg, "_blank", "noopener");
+            } else if (canal === 'tel') {
+                window.location.href = "tel:+" + p;
+            } else if (canal === 'email1') {
+                const subj = encodeURIComponent("Contacto Profesional / Proceso de Selección - Dra. Alix Camacho");
+                window.location.href = "mailto:" + m1 + "," + m2 + "?subject=" + subj;
+            }
+        }
+
+        function enviarMensajeProtegido(event, via) {
+            if (event) event.preventDefault();
+            const nombre = document.getElementById('form-name').value || "Reclutador";
+            const org = document.getElementById('form-org').value || "Clínica";
+            const pais = document.getElementById('form-country').value;
+            const asunto = document.getElementById('form-subject').value;
+            const mensaje = document.getElementById('form-msg').value || "Deseo ponerme en contacto.";
+
+            const p = _decode(_vault.ph);
+            const m1 = _decode(_vault.em1);
+            const m2 = _decode(_vault.em2);
+
+            if (via === 'whatsapp') {
+                const texto = encodeURIComponent(
+                    `Hola Dra. Alix Camacho, le contacto desde su CV Web:\n` +
+                    `• *Nombre:* ${nombre}\n` +
+                    `• *Entidad:* ${org} (${pais})\n` +
+                    `• *Asunto:* ${asunto}\n` +
+                    `• *Mensaje:* ${mensaje}`
+                );
+                window.open("https://wa.me/" + p + "?text=" + texto, "_blank", "noopener");
+            } else {
+                const subject = encodeURIComponent(`[CV Web - ${asunto}] ${org} (${pais})`);
+                const body = encodeURIComponent(
+                    `Estimada Dra. Alix Maryory Camacho Céspedes,\n\n` +
+                    `Nombre de contacto: ${nombre}\n` +
+                    `Institución / Clínica: ${org}\n` +
+                    `País: ${pais}\n` +
+                    `Motivo: ${asunto}\n\n` +
+                    `Mensaje:\n${mensaje}\n`
+                );
+                window.location.href = `mailto:${m1},${m2}?subject=${subject}&body=${body}`;
+            }
+        }
+
+        // Image Customizer for GitHub
+        function cargarImagenPersonalizada(event, tipo) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                if (tipo === 'portrait') {
+                    const img = document.getElementById('hero-portrait-img');
+                    img.src = dataUrl;
+                } else if (tipo === 'logo') {
+                    const navImg = document.getElementById('nav-logo-img');
+                    const badgeImg = document.getElementById('hero-logo-badge');
+                    if (navImg) navImg.src = dataUrl;
+                    if (badgeImg) badgeImg.src = dataUrl;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
